@@ -7,7 +7,8 @@ options = Options()
 options.headless = True
 
 driver = webdriver.Chrome(options=options)
-driver.get("__URL_TO_TEST__")
+#driver.get("__URL_TO_TEST__")
+driver.get("https://www.youtube.com")
 
 time.sleep(5) # wait for page load
 
