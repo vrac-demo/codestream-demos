@@ -1,0 +1,43 @@
+---
+project: Rainpole Multi-Cloud Developer Access
+kind: PIPELINE
+name: Selenium-Test-URL
+icon: organization,left, is-purple
+enabled: true
+concurrency: 10
+input:
+  urlToTest: https://www.vmware.com
+_inputMeta:
+  urlToTest:
+    mandatory: true
+    description: The URL to be tested
+workspace:
+  endpoint: Temp-Docker-AWS
+  image: jlemmon/selenium-headless
+  registry: ''
+  path: /tmp
+  cache:
+  - /tmp
+  autoCloneForTrigger: false
+  limits:
+    cpu: 1.0
+    memory: 1024
+stageOrder:
+- Stage0
+stages:
+  Stage0:
+    taskOrder:
+    - Test URL for Returned Title
+    tasks:
+      Test URL for Returned Title:
+        type: CI
+        input:
+          steps:
+          - python3 /home/seluser/test/cicd_scripts/testUrl.py ${input.urlToTest}
+          - ''
+          export: [
+            ]
+          artifacts: [
+            ]
+          process: [
+            ]
